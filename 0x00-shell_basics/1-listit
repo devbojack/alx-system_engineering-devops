@@ -1,0 +1,5 @@
+# !/bin/bash
+for file in $(ls $dir)
+do
+    [ -f $file ] && echo "$file"
+done
