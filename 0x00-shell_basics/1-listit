@@ -1,3 +1,2 @@
 # !/bin/bash
 echo "$file" $(ls $dir)
-
