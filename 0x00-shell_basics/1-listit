@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$file" $(ls $dir)
+for file in $(ls $dir); do echo $file; done
