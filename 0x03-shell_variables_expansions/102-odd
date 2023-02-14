@@ -1,2 +1,2 @@
 #!/bin/bash
-ls | tr ' ' '\n'
+ls |awk  '(NR%2!=0)'
