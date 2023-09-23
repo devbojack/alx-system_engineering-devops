@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Custom client configuration file
+Host 54.172.145.114
+User Bojack
+IdentityFile ~./ssh/school
+BatchMode yes
+PasswordAuthentication no
