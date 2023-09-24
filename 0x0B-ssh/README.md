@@ -1,10 +1,9 @@
 # 0x0B. SSH
-<span class="custom-background">DevOps</span>
-<span class="custom-background">SSH</span>
-<span class="custom-background">Network</span>
-<span class="custom-background">SysAdmin</span>
-<span class="custom-background">Security</span>
 
+| | | | | |
+|-|-|-|-|-|
+|  DevOps  |  SSH  |  Network  |  SysAdmin  | Security |
+| | | | | |
 
 
 - By [Justus Lolwerikoi](https://github.com/devbojack)

@@ -1,9 +1,9 @@
 # 0x0A. Configuration management
 
-<span class="custom-background">DevOps</span>
-<span class="custom-background">SysAdmin</span>
-<span class="custom-background">Scripting</span>
-<span class="custom-background">CI/CD</span>
+| | | | |
+|-|-|-|-|
+|  DevOps  |  SysAdmin  |  Scripting  |  CI/CD  |
+| | | | |
 
 
 - By [Justus Lolwerikoi](https://github.com/devbojack)
@@ -68,17 +68,3 @@ You do not need to attempt to upgrade versions. This project is simply a set of 
 $ gem install puppet-lint
 ```
 
-
-
-
-<style>
-.custom-background {
-    background-color: #8B0300;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-radius: 4px;
-    margin: 8px;
-}
-</style>
