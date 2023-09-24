@@ -72,15 +72,3 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 * The first line of all your Bash scripts should be exactly #!/usr/bin/env bash
 * The second line of all your Bash scripts should be a comment explaining what is the script doing
 
-
-<style>
-.custom-background {
-    background-color: #8B0300;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-radius: 4px;
-    margin: 8px;
-}
-</style>
