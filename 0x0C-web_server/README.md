@@ -52,7 +52,7 @@ Tips: to test your answer Bash script, feel free to reproduce the checker enviro
 * see how it behaves
 
 ## Resources
-###### Read or watch:
+##### Read or watch:
 * [How the web works](https://intranet.alxswe.com/rltoken/6TI3HiyFdwrbXWKVF24Gxw)
 * [Nginx](https://intranet.alxswe.com/rltoken/vkVMGlaf39j2DWAQWzo6EA)
 * [How to Configure Nginx](https://intranet.alxswe.com/rltoken/zKrpVxWuUHVdW4URAjdFbw)
@@ -67,7 +67,7 @@ Tips: to test your answer Bash script, feel free to reproduce the checker enviro
 * [RFC 7231 (HTTP/1.1)](https://intranet.alxswe.com/rltoken/BGa6RrS0dnM6EdBGS_ZDUw)
 * [RFC 7540 (HTTP/2)](https://intranet.alxswe.com/rltoken/IZ2fyYn1qNZ9RXXsg5vG1g)
 
-###### man or help
+#### man or help
 * scp
 * curl
 
