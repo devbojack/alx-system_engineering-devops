@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+# update
 # Install nginx
+# listen to port 80
+# allow nginx on firewall
+# update nginx index page
+# restart nginx
 
 apt update
 apt install -y nginx
 ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 service nginx restart
