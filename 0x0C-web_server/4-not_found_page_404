@@ -9,17 +9,12 @@
 # restart Nginx
 
 DESTINATION_URL="https://github.com/devbojack"
-ERROR_STRING="Ceci n'est pas une page"
-ERROR_LOCATION="location = /404.html {\n\t\troot /var/www/html/;\n\t\tinternal;\n"
-ERROR_D="error_page 404 /404.html;\n\t$ERROR_LOCATION"
-ERROR_404="}\n\n\t$ERROR_D\t}"
-CONFIG_SHC="server_name _;\n\trewrite ^/redirect_me/$ $DESTINATION_URL permanent;"
 
 sudo apt-get update
 sudo apt-get install -y nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.html
-echo ERROR_STRING > /var/www/html/404.html
-sed -i "s|server_name\ _;|$CONFIG_SHC|" /etc/nginx/sites-available/default
-sed -i "0,/}/ s|}|$ERROR_404|" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i "/listen 80 default_server/a rewrite ^/redirect_me $DESTINATION_URL permanent;" /etc/nginx/sites-available/default
+sudo sed -i 's@error_page 404 /usr/share/nginx/html/;@error_page 404 /var/www/html/404.html;@' /etc/nginx/sites-available/default
 sudo service nginx restart
