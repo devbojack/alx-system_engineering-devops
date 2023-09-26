@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Redirecting traffic using nginx
+# update
+# Install nginx
+# listen to port 80
+# allow nginx on firewall
+# update nginx index page
+# restart Nginx
+
+DESTINATION_URL="https://github.com/devbojack"
+
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sed -i "/listen 80 default_server/a rewrite ^/redirect_me $DESTINATION_URL permanent;" /etc/nginx/sites-available/default
+sudo service nginx restart
