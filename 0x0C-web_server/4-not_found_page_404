@@ -26,5 +26,5 @@ echo "server {
    location = /404.html{
       internal;
    }
-}" | sudo tee default /etc/nginx/sites-available/default
+}" | sudo tee /etc/nginx/sites-available/default
 sudo service nginx restart
