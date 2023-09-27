@@ -1,29 +1,37 @@
-ustom 404 error page
-# Redirecting traffic using nginx
-# update
-# Install nginx
-# listen to port 80
-# allow nginx on firewall
-# update nginx index page
-# restart Nginx
+# Install Nginx web server with Puppet
+include stdlib
 
-sudo apt-get update
-sudo apt-get install -y nginx
-sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-echo "server {
-   listen 80 default_server;
-   listen [::]:80 default_server;
+$link = 'https://www.youtube.com/watch?v=QH2-TGUlwu4'
+$content = "\trewrite ^/redirect_me/$ ${link} permanent;"
 
-   root /var/www/html;
-   index index.html;
-   location /redirect_me {
-      return 301 https://github.com/devbojack;
-   }
-   error_page 404 /404.html;
-   location = /404.html{
-      internal;
-   }
-}" | sudo tee /etc/nginx/sites-available/default
-sudo service nginx restart
+exec { 'update packages':
+  command => '/usr/bin/apt-get update'
+}
+
+exec { 'restart nginx':
+  command => '/usr/sbin/service nginx restart',
+  require => Package['nginx']
+}
+
+package { 'nginx':
+  ensure  => 'installed',
+  require => Exec['update packages']
+}
+
+file { '/var/www/html/index.html':
+  ensure  => 'present',
+  content => 'Hello World!',
+  mode    => '0644',
+  owner   => 'root',
+  group   => 'root'
+}
+
+file_line { 'Set 301 redirection':
+  ensure   => 'present',
+  after    => 'server_name\ _;',
+  path     => '/etc/nginx/sites-available/default',
+  multiple => true,
+  line     => $content,
+  notify   => Exec['restart nginx'],
+  require  => File['/var/www/html/index.html']
+}
