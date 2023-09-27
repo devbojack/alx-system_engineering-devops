@@ -12,7 +12,7 @@ sudo apt-get update
 sudo apt-get install -y nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" | sudo tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /vat/www.html/404.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 echo "server {
    listen 80 default_server;
    listen [::]:80 default_server;
