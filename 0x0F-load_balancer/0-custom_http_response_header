@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# SSH into the web-01 and web-02 servers.
+# Install Nginx
+# Open the Nginx configuration file for editing
+# Inside the http blck, add the following line to set the variable $hostname to the hostname of the server: set $hostname ""
+# Inside the server block, add the following line to set the custom header: add_header X-Served-By $hostname;.
+# Save and close the file.
+# Restart Nginx
+
+link="https://github.com/devbojack"
+new_conf="server_name _;\n\trewrite ^/redirect_me/$ $link permanent;"
+location_error="location = /404.html {\n\t\troot /var/www/html/;\n\t\tinternal;\n"
+error_directive="error_page 404 /404.html;\n\t$location_error"
+error_404="}\n\n\t$error_directive\t}"
+
+sudo apt update
+sudo apt install -y nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i "s|server_name\ _;|$new_conf|" /etc/nginx/sites-available/default
+sudo sed -i "0,/}/ s|}|$error_404|" /etc/nginx/sites-available/default
+sudo service nginx restart
+
+config_file="/etc/nginx/nginx.conf"
+
+if ! sudo grep -q "add_header X-Served-By" $config_file;
+then
+    header_key="X-Served-By"
+    header_value="\$hostname"
+    header="add_header $header_key $header_value;"
+    search="http {"
+    new_conf="$search\n\t$header"
+
+    # Replace the value found with the new configuration
+    sudo sed -i "s|$search|$new_conf|" $config_file
+
+    # Restart Nginx Service
+    sudo service nginx restart
+fi
