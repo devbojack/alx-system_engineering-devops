@@ -1,0 +1,33 @@
+#!/bin/bash
+# Audits domain and subdomain
+
+query_domain() {
+    local domain="$1"
+    local subdomain="$2"
+    local record_type
+    local destination
+
+    if [ -z "$subdomain" ]; then
+        subdomain="www lb-01 web-01 web-02"
+    fi
+
+    for sub in $subdomain; do
+        result=$(dig +short "$sub.$domain")
+
+        if [ -n "$result" ]; then
+            if [[ "$result" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                record_type="A"
+            else
+                record_type="CNAME"
+            fi
+
+            destination="$result"
+            echo "The subdomain $sub is a $record_type record and points to $destination"
+        fi
+    done
+}
+
+domain="$1"
+subdomain="$2"
+
+query_domain "$domain" "$subdomain"
