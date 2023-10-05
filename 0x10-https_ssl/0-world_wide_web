@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Audits domain and subdomain
 
 query_domain() {
