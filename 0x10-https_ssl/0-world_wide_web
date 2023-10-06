@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Audits domain and subdomain
+
+query_domain() {
+    local domain="$1"
+    local subdomain="$2"
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+    else
+        subdomains=("$subdomain")
+    fi
+
+    for sub in "${subdomains[@]}"; do
+        result=$(dig +short "$sub.$domain")
+
+        if [ -n "$result" ]; then
+            record_type=$(dig +short "$sub.$domain" | awk 'NR==1 {print ($0 ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) ? "A" : "CNAME"}')
+            destination="$result"
+            echo "The subdomain $sub is a $record_type record and points to $destination"
+        fi
+    done
+}
+
+domain="$1"
+subdomain="$2"
+
+query_domain "$domain" "$subdomain"
