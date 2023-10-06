@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Start Nginx if it is not running
 # Check if Nginx is listening on port 80
 
