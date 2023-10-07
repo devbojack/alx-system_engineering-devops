@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# configures nginx to run and listen to port 80
-service nginx start
-curl 0:80
-service nginx status | grep "nginx is not running"
+# Configure the server to enable Nginx on 80 port
+
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+pkill -1 nginx
