@@ -1,42 +1,6 @@
 #!/usr/bin/env bash
-<<<<<<< HEAD
 # Configure the server to enable Nginx on 80 port
 
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx start
-=======
-# Update the package repository and install Nginx
-
-sudo apt-get update
-sudo apt-get install nginx -y
-
-# Backup the default Nginx configuration
-sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
-
-# Create a new Nginx configuration file
-cat <<EOF | sudo tee /etc/nginx/sites-available/default
-server {
-    listen 80;
-    server_name _;
-
-    location / {
-        root /var/www/html;
-        index index.html;
-    }
-}
-EOF
-
-# Create a default index.html file
-echo "Hello, Nginx!" | sudo tee /var/www/html/index.html
-
-# Test the Nginx configuration
-sudo nginx -t
-
-# Reload Nginx to apply the new configuration
-sudo systemctl reload nginx
-
-# Check if Nginx is running and listening on port 80
-ss -tln | grep ':80'
-
-echo "Nginx is now configured to listen on port 80 for all active IPv4 IPs."
->>>>>>> f7a252ac5c491cbdabca49c98fb81b7c683488cc
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
