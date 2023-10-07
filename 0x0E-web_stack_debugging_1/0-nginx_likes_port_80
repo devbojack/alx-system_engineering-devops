@@ -1,16 +1,5 @@
-#!/bin/bash
-# Start Nginx if it is not running
-# Check if Nginx is listening on port 80
+#!/usr/bin/env bash
+# Configure the server to enable Nginx on 80 port
 
-sudo systemctl start nginx
-
-if sudo netstat -tlnp | grep nginx | grep -qv :80; then
-    if sudo nginx -t | grep -q "test is successful"; then
-        if sudo netstat -tlnp | grep :80 | grep -qv nginx; then
-            if sudo ufw status | grep -qv "80/tcp"; then
-                sudo ufw allow 80
-            fi
-            sudo systemctl restart nginx
-        fi
-    fi
-fi
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx start
