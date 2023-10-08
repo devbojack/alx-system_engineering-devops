@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # configure HAProxy to send traffic to "web-01" and "web-02
 
 sudo apt-get update
