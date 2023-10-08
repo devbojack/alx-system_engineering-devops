@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
-# Install the load balancer
+#!/bin/bash
+# configure HAProxy to send traffic to "web-01" and "web-02
+
 sudo apt-get update
 sudo apt-get -y install --no-install-recommends software-properties-common
 sudo add-apt-repository -y ppa:vbernat/haproxy-2.4
@@ -10,14 +11,16 @@ INIT_FILE='/etc/default/haproxy'
 CONFIG_FILE='/etc/haproxy/haproxy.cfg'
 HAPROXY_LB_CONFIG=\
 "
+#--$DOMAIN_NAME-params-begin--
 backend $DOMAIN_NAME-backend
 	balance roundrobin
-	server 914-web-01 54.172.145.114:80 check
-	server 914-web-02 54.88.14.197:80 check
+	server 227984-web-01 54.172.145.114:80 check
+	server 227984-web-02 100.25.193.15:80 check
 frontend $DOMAIN_NAME-frontend
 	bind *:80
 	mode http
 	default_backend $DOMAIN_NAME-backend
+#--$DOMAIN_NAME-params-end--
 "
 
 [ -f "$INIT_FILE" ] || touch "$INIT_FILE"
