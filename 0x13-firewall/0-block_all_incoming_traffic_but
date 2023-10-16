@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Update and install UFW
+sudo apt update
+sudo apt install -y ufw
+
+# Enable UFW
+sudo ufw enable
+
+# Allow SSH, HTTP, and HTTPS
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Deny all incoming traffic by default
+sudo ufw default deny incoming
+
+# Reload UFW to apply the changes
+sudo ufw reload
+
+# Display the status to verify the rules
+sudo ufw status
