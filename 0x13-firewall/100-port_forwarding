@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Enable UFW
+sudo ufw enable
+
+# Add a NAT rule for port forwarding
+sudo bash -c 'echo "*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT" >> /etc/ufw/before.rules'
+
+# Reload UFW to apply the changes
+sudo ufw reload
+
+# Display the UFW status to verify the rules
+sudo ufw status
