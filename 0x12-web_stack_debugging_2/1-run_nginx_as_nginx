@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# configures nginx running and listening to all active IPs on port  8080
+
+
+pkill apache2
+if grep -q "listen 80" /etc/nginx/sites-available/default ; then
+    sed -i "s/listen 80/listen 8080/" /etc/nginx/sites-available/default
+fi
+
+if grep -q "listen \[::\]:80" /etc/nginx/sites-available/default ; then
+    sed -i "s/listen \[::\]:80/listen \[::\]:8080/" /etc/nginx/sites-available/default
+fi
+
+chown nginx:nginx /etc/nginx/nginx.conf
+
+chmod 0644 /etc/nginx/nginx.conf
+
+su nginx -c "service nginx start"
