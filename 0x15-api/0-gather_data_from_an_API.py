@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
+"""Returns information about his/her TODO list progress"""
 
 import requests
 import sys
 
 
-def get_employee_todo_progress(employee_id):
+if __name__ == "__main__":
+    try:
+        emp_id = int(argv[1])
+    except ValueError:
+        exit()
+
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(employee_id)).json()
     todos = requests.get(url + "todos", params={"userId": employee_id}).json()
@@ -16,11 +21,3 @@ def get_employee_todo_progress(employee_id):
         user.get("name"), len(completed), len(todos)))
 
     [print("\t{}".format(c)) for c in completed]
-
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-    else:
-        employee_id = int(sys.argv[1])
-        get_employee_todo_progress(employee_id)
