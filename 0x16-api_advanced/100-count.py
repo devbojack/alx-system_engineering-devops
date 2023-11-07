@@ -9,12 +9,15 @@ from collections import Counter
 
 
 def count_words(subreddit, word_list, after=None, counts=None):
+    lk = subreddit
+    a = after
+
     if counts is None:
         counts = Counter()
-    if after is None:
-        after = ''
+    if a is None:
+        a = ''
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}"
+    url = f"https://www.reddit.com/r/{lk}/hot.json?limit=100&after={a}"
     headers = {'User-Agent': 'My Reddit API Client'}
 
     try:
@@ -30,9 +33,9 @@ def count_words(subreddit, word_list, after=None, counts=None):
                     if f' {keyword} ' in f' {title.lower()} ':
                         counts[keyword.lower()] += 1
 
-            after = data['data']['after']
-            if after:
-                return count_words(subreddit, word_list, after, counts)
+            a = data['data']['after']
+            if a:
+                return count_words(l, word_list, a, counts)
 
         elif response.status_code == 404:
             return
