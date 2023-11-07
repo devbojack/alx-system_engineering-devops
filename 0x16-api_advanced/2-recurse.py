@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 queries the Reddit API and returns a list
@@ -8,26 +8,32 @@ for a given subreddit
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=''):
-    base_url = 'https://www.reddit.com'
-    api_uri = '{base}/r/{subreddit}/hot.json'.format(base=base_url,
-                                                     subreddit=subreddit)
-    user_agent = {'User-Agent': 'Python/requests'}
-    payload = {'after': after, 'limit': '100'}
-    res = requests.get(api_uri, headers=user_agent,
-                       params=payload, allow_redirects=False)
+def top_ten(subreddit):
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
+    headers = {'User-Agent': 'My Reddit API Client'}
 
-    if res.status_code == 200:
-        res = res.json()
-        hot_posts = res.get('data').get('children')
-        after = res.get('data').get('after')
+    try:
+        response = requests.get(url, headers=headers)
 
-        for post in hot_posts:
-            hot_list.append(post.get('data').get('title'))
+        if response.status_code == 200:
+            data = response.json()
+            posts = data['data']['children']
 
-        if after is not None:
-            recurse(subreddit, hot_list, after)
+            for post in posts:
+                title = post['data']['title']
+                print(title)
+        else:
 
-        return hot_list
+            print(None)
+    except Exception as e:
 
-    return None
+        print(None)
+
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        top_ten(subreddit)
