@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
 """
-queries the Reddit API and returns the number of 
+queries the Reddit API and returns the number of
 subscribers for a given subreddit.
 """
 import requests
+
 
 def number_of_subscribers(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
@@ -30,4 +31,5 @@ if __name__ == '__main__':
     else:
         subreddit = sys.argv[1]
         num_subscribers = number_of_subscribers(subreddit)
+
         print(f"{num_subscribers}")
