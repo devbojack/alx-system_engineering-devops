@@ -8,8 +8,14 @@ for a given subreddit
 import requests
 
 
-def top_ten(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
+def recurse(subreddit, hot_list=None, after=None):
+    if hot_list is None:
+        hot_list = []
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+
+    if after:
+        url += f'&after={after}'
+
     headers = {'User-Agent': 'My Reddit API Client'}
 
     try:
@@ -21,13 +27,20 @@ def top_ten(subreddit):
 
             for post in posts:
                 title = post['data']['title']
-                print(title)
+                hot_list.append(title)
+
+            after = data['data']['after']
+            if after:
+                return recurse(subreddit, hot_list, after)
+
+        elif response.status_code == 404:
+            return None
         else:
-
-            print(None)
+            return None
     except Exception as e:
+        return None
 
-        print(None)
+    return hot_list
 
 
 if __name__ == '__main__':
@@ -36,4 +49,9 @@ if __name__ == '__main__':
         print("Please pass an argument for the subreddit to search.")
     else:
         subreddit = sys.argv[1]
-        top_ten(subreddit)
+        hot_articles = recurse(subreddit)
+        if hot_articles is not None:
+            for idx, title in enumerate(hot_articles, start=1):
+                print(f"{idx}. {title}")
+        else:
+            print(None)
