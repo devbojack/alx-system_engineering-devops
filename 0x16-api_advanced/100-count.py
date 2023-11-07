@@ -14,7 +14,7 @@ def count_words(subreddit, word_list, after=None, counts=None):
     if after is None:
         after = ''
 
-    url = f"https://www.reddit.com/r/"\
+    url = f"https://www.reddit.com/r/" \
         "{subreddit}/hot.json?limit=100&after={after}"
     headers = {'User-Agent': 'My Reddit API Client'}
 
