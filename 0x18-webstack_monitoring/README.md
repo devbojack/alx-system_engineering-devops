@@ -78,8 +78,6 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 
 # TASKS
 
-<br>
-
 <details>
 <summary>0. Sign up for Datadog and install datadog-agent</summary>
 
