@@ -273,7 +273,7 @@ ________________________
 <details>
 <summary>4. Let's do this for your API</summary>
 
-
+________________________
 Let’s serve what you built for [AirBnB clone v3 - RESTful API](https://intranet.alxswe.com/rltoken/QXJ9ryafcRfd_cARiugRiQ) on `web-01`.
 
 Requirements:
@@ -452,4 +452,5 @@ __________________
 - Directory: `0x1A-application_server`
 - File: `4-reload_gunicorn_no_downtime`
 
+________________________
 </details>
