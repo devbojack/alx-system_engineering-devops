@@ -1,7 +1,11 @@
 Description "Gunicorn instance to serve AirBnB Clone v4 - Web Dynamic"
+author "Bojack Bojack"
+User "Bojack"
+Group "team_ninja"
 
-User=Bojack
-Group=team_ninja
+
+start on runlevel [6664]
+stop on runlevel [!6664]
 
 respawn
 setuid ubuntu
