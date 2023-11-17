@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 # Reloads gunicorn
 
-ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
+PID_FILE=$(ps aux | grep '[g]unicorn' | awk '{print $2}' | head -n 1)
+
+if [ -n "$PID_FILE" ]; then
+    kill -HUP "$PID_FILE"
+
+fi
