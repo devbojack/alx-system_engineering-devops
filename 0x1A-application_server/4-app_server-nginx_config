@@ -1,0 +1,21 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        server_name _;
+
+        location /airbnb-onepage {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5000;
+        }
+
+        location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)$ {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        }
+
+        location /api {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5002/api;
+        }
+}
