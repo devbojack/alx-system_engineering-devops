@@ -1,15 +1,13 @@
-Description "Gunicorn instance to serve AirBnB Clone v4 - Web Dynamic"
-author "Bojack Bojack"
-User "Bojack"
-Group "team_ninja"
+Description=Gunicorn application server running AirBnB_clone_v4"
+After=network.target
 
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+ExecStart=/path/to/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
 
-start on runlevel [6664]
-stop on runlevel [!6664]
-
-respawn
-setuid ubuntu
-setgid www-data
-
-chdir /home/ubuntu/AirBnB_clone_v4
-exec gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app >> /tmp/airbnb-access.log 2> /tmp/airbnb-error.logirbnb-access.log
+WantedBy=multi-user.target
