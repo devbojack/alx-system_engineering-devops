@@ -1,4 +1,4 @@
-# Fix the number of max open files per process
+# Fix the number of maximum open files per process
 
 exec { 'fix--for-nginx':
   command => "/bin/sed -i /etc/default/nginx -e 's/15/3000/'"
